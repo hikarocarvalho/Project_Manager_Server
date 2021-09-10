@@ -21,6 +21,9 @@ app.use('/projects',projects);
   
 const tasks = require('./routers/tasks.routes.js');
 app.use('/tasks',tasks);
+
+const taskspriority = require('./routers/task_priority.routes.js');
+app.use('/tasks',taskspriority);
   
 const users = require('./routers/users.routes.js');
 app.use('/users',users);
