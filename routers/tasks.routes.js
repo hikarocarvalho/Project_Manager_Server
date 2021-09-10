@@ -35,7 +35,7 @@ router.get("/:id",async(req,res)=>{
 })
 
 router.put("/update/:id",async (req, res) => {
-    await Tasks.updateOne({_id:req.params.id})
+    await Tasks.updateOne({_id:req.params.id},req.body)
     .then(()=>{
         res.status(200).send("You has updated with sucess");
     }).catch((err)=>{

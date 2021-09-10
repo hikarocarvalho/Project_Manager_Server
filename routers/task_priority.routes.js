@@ -35,7 +35,7 @@ router.get("/:id",async(req,res)=>{
 })
 
 router.put("/update/:id",async (req, res) => {
-    await TaskPriority.updateOne({_id:req.params.id})
+    await TaskPriority.updateOne({_id:req.params.id},req.body)
     .then(()=>{
         res.status(200).send("You has updated with sucess");
     }).catch((err)=>{
