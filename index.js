@@ -17,13 +17,13 @@ const db_name = process.env.DB_NAME;
 connection(db_url,db_user,db_pass,db_name);
 
 const projects = require('./routers/projects.routes.js');
-app.use('/projects',projectRouter);
+app.use('/projects',projects);
   
 const tasks = require('./routers/tasks.routes.js');
-app.use('/tasks',taskRouter);
+app.use('/tasks',tasks);
   
 const users = require('./routers/users.routes.js');
-app.use('/users',userRouter);
+app.use('/users',users);
   
 app.listen(process.env.PORT || port, ()=> {
     console.info(`Servidor rodando na porta ${port}`);

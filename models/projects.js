@@ -6,6 +6,6 @@ const projectModel = new mongoose.Schema({
   description: { type: String, required: true }
 })
 
-const project = mongoose.model("projects", projectModel);
+const Projects = mongoose.model("projects", projectModel);
 
-module.exports = project;
+module.exports = Projects;
