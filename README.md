@@ -2,9 +2,13 @@
 ### In this front-end project, I use mongoose library, express library and envdot library.
 
 ### The structure of my project at this moment:
-
+<style>
+    .list{
+        list-style:none;
+    }
+</style>
 <ul>
-<li><ul style='list-style:none;'>
+<li><ul class="list">
     <li> :open_file_folder: models
         <ul style='list-style:none;'>
             <li> :open_file_folder: conn
