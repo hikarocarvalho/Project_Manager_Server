@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const TaskPriority = require('../models/task_priority');
+const {GodResponse,BadResponse} = require('../models/responses');
+const name = "task priority";
 
 router.post("/add", async (req, res) => {
     await TaskPriority.create(req.body)
     .then(() => {
-        res.status(200).send("You have create a new TaskPriority.");
+        GodResponse(res,name,"create",0,"");
     }).catch((err) => {
-        res.status(400).send("You have some problem with the creation of this new TaskPriority, try again!");
-        console.error(err);
+        BadResponse(res,err,name,"create");
+        
     })
 
 });
@@ -16,42 +18,42 @@ router.post("/add", async (req, res) => {
 router.get('/',async (req, res) => {
     await TaskPriority.find({})
     .then((priority) => {
-        res.status(200).send(priority);
+        GodResponse(res,name,"get",1,priority);
     })
     .catch((err) => {
-        res.status(400).send("You have some problem with this Priority!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
+        
     })
 });
 router.get("/:id",async(req,res)=>{
     await TaskPriority.findById({_id:req.params.id})
     .then((priority) =>{
-        res.status(200).send(priority);
+        GodResponse(res,name,"get",1,priority);
     })
     .catch((err)=>{
-        res.status(400).send("This Priority maybe do not exist!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
+        
     });
 })
 
 router.put("/update/:id",async (req, res) => {
     await TaskPriority.updateOne({_id:req.params.id},req.body)
     .then(()=>{
-        res.status(200).send("You has updated with sucess");
+        GodResponse(res,name,"update",0,"");
+    
     }).catch((err)=>{
-        res.status(400).send("This update has some problem!");
-        console.log(err)
+        BadResponse(res,err,name,"update");
+        
     });
 });
 
 router.delete("/delete/:id",async (req, res) => {
     await TaskPriority.deleteOne({_id:req.params.id})
     .then(()=>{
-        res.status(200).send("You has deleted with sucess");
+        GodResponse(res,name,"delete",0,"");
+        
     }).cath((err)=>{
-        res.status(400).send("This try delete some TaskPriority, but de request do not make this."
-                                +"Maybe some data value have some problem try again");
-        console.log(err)
+        BadResponse(res,err,name,"delete");
     })
 });
 

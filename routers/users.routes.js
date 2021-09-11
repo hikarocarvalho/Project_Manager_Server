@@ -1,57 +1,53 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../models/users');
+const {GodResponse,BadResponse} = require('../models/responses');
+const name = "users";
 
 router.post("/add", async (req, res) => {
     await Users.create(req.body)
     .then(() => {
-        res.status(200).send("You have create a new Users.");
+        GodResponse(res,name,"create",0,"");
     }).catch((err) => {
-        res.status(400).send("You have some problem with the creation of this new Users, try again!");
-        console.error(err);
+        BadResponse(res,err,name,"create");
     })
 
 });
 
 router.get('/',async (req, res) => {
     await Users.find({})
-    .then((task) => {
-        res.status(200).send(task);
+    .then((user) => {
+        GodResponse(res,name,"create",1,user);
     })
     .catch((err) => {
-        res.status(400).send("You have some problem with this Users!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
     })
 });
 router.get("/:id",async(req,res)=>{
     await Users.findById({_id:req.params.id})
-    .then((task) =>{
-        res.status(200).send(task);
+    .then((user) =>{
+        GodResponse(res,name,"create",1,user);
     })
     .catch((err)=>{
-        res.status(400).send("This Users maybe do not exist!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
     });
 })
 
 router.put("/update/:id",async (req, res) => {
     await Users.updateOne({_id:req.params.id},req.body)
     .then(()=>{
-        res.status(200).send("You has updated with sucess");
+        GodResponse(res,name,"update",0,"");
     }).catch((err)=>{
-        res.status(400).send("This update has some problem!");
-        console.log(err);
+        BadResponse(res,err,name,"update");
     });
 });
 
 router.delete("/delete/:id",async (req, res) => {
     await Users.deleteOne({_id:req.params.id})
     .then(()=>{
-        res.status(200).send("You has deleted with sucess");
+        GodResponse(res,name,"delete",0,"");
     }).cath((err)=>{
-        res.status(400).send("This try delete some Users, but de request do not make this."
-                                +"Maybe some data value have some problem try again");
-        console.log(err);
+        BadResponse(res,err,name,"delete");
     })
 });
 

@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Projects = require('../models/projects');
+const {GodResponse,BadResponse} = require('../models/responses');
+
+const name = "Project";
 
 router.post("/add", async (req, res) => {
     await Projects.create(req.body)
     .then(() => {
-        res.status(200).send("You have create a new Project.");
+        GodResponse(res,name,"create",0,"");
     }).catch((err) => {
-        res.status(400).send("You have some problem with the creation of this new Project, try again!");
-        console.error(err);
+        BadResponse(res,err,name,"create");
     })
 
 });
@@ -16,42 +18,37 @@ router.post("/add", async (req, res) => {
 router.get('/',async (req, res) => {
     await Projects.find({})
     .then((project) => {
-        res.status(200).send(project);
+        GodResponse(res,name,"get",1,project);
     })
     .catch((err) => {
-        res.status(400).send("You have some problem with this Project!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
     })
 });
 router.get("/:id",async(req,res)=>{
     await Projects.findById({_id:req.params.id})
     .then((project) =>{
-        res.status(200).send(project);
+        GodResponse(res,name,"get",1,project);
     })
     .catch((err)=>{
-        res.status(400).send("This project maybe do not exist!");
-        console.log(err);
+        BadResponse(res,err,name,"get");
     });
 })
 
 router.put("/update/:id",async (req, res) => {
     await Projects.updateOne({_id:req.params.id},req.body)
     .then(()=>{
-        res.status(200).send("You has updated with sucess");
+        GodResponse(res,name,"update",0,"");
     }).catch((err)=>{
-        res.status(400).send("This update has some problem!");
-        console.log(err)
+        BadResponse(res,err,name,"update");
     });
 });
 
 router.delete("/delete/:id",async (req, res) => {
     await Projects.deleteOne({_id:req.params.id})
     .then(()=>{
-        res.status(200).send("You has deleted with sucess");
+        GodResponse(res,name,"delete",0,"");
     }).cath((err)=>{
-        res.status(400).send("This try delete some project, but de request do not make this."
-                                +"Maybe some data value have some problem try again");
-        console.log(err)
+        Response(res,err,name,"delete");
     })
 });
 
