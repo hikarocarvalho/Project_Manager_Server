@@ -24,7 +24,16 @@ router.get('/',async (req, res) => {
     })
 });
 router.get("/:id",async(req,res)=>{
-    await Tasks.findById({_id:req.params.id})
+    await Tasks.find({_id:req.params.id})
+    .then((task) =>{
+        GodResponse(res,name,"create",1,task);
+    })
+    .catch((err)=>{
+        BadResponse(res,err,name,"get");
+    });
+})
+router.get("/projectid/:id",async(req,res)=>{
+    await Tasks.find({project_id:req.params.id})
     .then((task) =>{
         GodResponse(res,name,"create",1,task);
     })
