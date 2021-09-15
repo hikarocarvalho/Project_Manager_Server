@@ -13,11 +13,19 @@ router.post("/add", async (req, res) => {
     })
 
 });
-
+router.get('/verify/:pass/:email',async (req, res) => {
+    await Users.find({user_pass:req.params.pass,user_email:req.params.email})
+    .then((user) => {
+        GodResponse(res,name,"get",1,user);
+    })
+    .catch((err) => {
+        BadResponse(res,err,name,"get");
+    })
+});
 router.get('/',async (req, res) => {
     await Users.find({})
     .then((user) => {
-        GodResponse(res,name,"create",1,user);
+        GodResponse(res,name,"pegar",1,user);
     })
     .catch((err) => {
         BadResponse(res,err,name,"get");

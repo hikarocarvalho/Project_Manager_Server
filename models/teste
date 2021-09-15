@@ -15,7 +15,8 @@
     "state_name": "asdf"
 }
 {
-    "user_name": "",
-    "user_pass": "",
-    "user_email": ""
+    "user_name": "valor",
+    "user_pass": "teste",
+    "user_email": "teste",
+    "user_age": "29"
 }

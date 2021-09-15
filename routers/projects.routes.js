@@ -14,7 +14,15 @@ router.post("/add", async (req, res) => {
     })
 
 });
-
+router.get('/byuser/:userid',async (req, res) => {
+    await Projects.find({user_id:req.params.userid})
+    .then((project) => {
+        GodResponse(res,name,"get",1,project);
+    })
+    .catch((err) => {
+        BadResponse(res,err,name,"get");
+    })
+});
 router.get('/',async (req, res) => {
     await Projects.find({})
     .then((project) => {
@@ -24,15 +32,15 @@ router.get('/',async (req, res) => {
         BadResponse(res,err,name,"get");
     })
 });
-router.get("/:id",async(req,res)=>{
-    await Projects.findById({_id:req.params.id})
-    .then((project) =>{
+router.get('/:id',async (req, res) => {
+    await Projects.find({_id:req.params.id})
+    .then((project) => {
         GodResponse(res,name,"get",1,project);
     })
-    .catch((err)=>{
+    .catch((err) => {
         BadResponse(res,err,name,"get");
-    });
-})
+    })
+});
 
 router.put("/update/:id",async (req, res) => {
     await Projects.updateOne({_id:req.params.id},req.body)

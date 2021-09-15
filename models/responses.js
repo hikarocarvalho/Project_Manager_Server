@@ -21,7 +21,7 @@ const GodResponse = (res,name,action,datacode=0,value)=>{
         }
     }else{
         if(res.status(200)){
-            res.status(200).send({message:`You have ${action} a ${name}.`});
+            res.status(200).send([{message:`You have ${action} a ${name}.`}]);
             console.log(200);
         }
     }
