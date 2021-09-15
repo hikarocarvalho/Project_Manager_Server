@@ -17,12 +17,12 @@ const GodResponse = (res,name,action,datacode=0,value)=>{
     if(datacode==1){
         if(res.status(200)){
             res.status(200).send(value);
-            console.log(200);
+            console.log(200,"returned value");
         }
     }else{
         if(res.status(200)){
             res.status(200).send([{message:`You have ${action} a ${name}.`}]);
-            console.log(200);
+            console.log(200,`You have ${action} a ${name}.`);
         }
     }
 }
