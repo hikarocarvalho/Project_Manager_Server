@@ -6,7 +6,7 @@ const connection = require('./models/conn/connection');
 const express = require('express');
 const cors = require('cors');
 const corsOptions = {
-    origin:'https://projectmanager-hk.herokuapp.com',
+    origin:'https://projectmanager-h.herokuapp.com',
     optionsSuccessStatus:200,
 };
 const app = express();
